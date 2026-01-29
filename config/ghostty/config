@@ -1,0 +1,10 @@
+font-size = 16
+
+theme = Gruvbox Dark Hard
+
+window-save-state = always
+macos-titlebar-style = tabs
+
+unfocused-split-opacity = 0.99
+background-opacity = 0.92
+background-blur = 75

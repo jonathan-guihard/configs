@@ -7,6 +7,7 @@ brew "starship"
 brew "neovim"
 brew "git"
 brew "gh"
+brew "ghostty"
 
 # Python tooling
 brew "uv"        # Modern Python package manager (replaces pip/pipenv)

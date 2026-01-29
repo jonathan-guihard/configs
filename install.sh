@@ -137,6 +137,9 @@ create_symlink "${DOTFILES_DIR}/config/starship/starship.toml" "$HOME/.config/st
 # Vim
 create_symlink "${DOTFILES_DIR}/config/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 
+# Ghostty
+create_symlink "${DOTFILES_DIR}/config/ghostty/config" "$HOME/.config/ghostty/config"
+
 # Link public functions
 section "Setting Up Functions"
 for func in "${DOTFILES_DIR}/functions"/*; do
@@ -218,6 +221,7 @@ check_symlink() {
 check_symlink "$HOME/.zshrc"
 check_symlink "$HOME/.config/starship.toml"
 check_symlink "$HOME/.config/nvim/init.vim"
+check_symlink "$HOME/.config/ghostty/config"
 check_symlink "$HOME/.gitignore_global"
 
 # Summary
@@ -233,6 +237,7 @@ echo "  • Zsh: ~/.zshrc -> ${DOTFILES_DIR}/config/zsh/zshrc"
 echo "  • Git: ~/.gitconfig"
 echo "  • Starship: ~/.config/starship.toml"
 echo "  • Neovim: ~/.config/nvim/init.vim"
+echo "  • Ghostty: ~/.config/ghostty/config"
 echo ""
 info "To customize further:"
 echo "  • Machine-specific settings: ${DOTFILES_DIR}/local/*.zsh"
