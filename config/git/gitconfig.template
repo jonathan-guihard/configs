@@ -1,0 +1,23 @@
+[user]
+    name = Jonathan Guihard
+    email = {{GIT_USER_EMAIL}}
+
+[alias]
+
+[tag]
+    forceSignAnnotated = true
+
+[push]
+    autoSetupRemote = true
+
+[init]
+    defaultBranch = main
+    templateDir = ~/.git-template
+
+[core]
+    excludesfile = ~/.gitignore_global
+
+# Conditional includes for work/enterprise configs
+# This loads Nexthink config ONLY when in ~/nexthink/projects/ directories
+[includeIf "gitdir:~/nexthink/projects/"]
+    path = ~/configs/private/config/git/gitconfig-nexthink

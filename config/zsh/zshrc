@@ -1,0 +1,45 @@
+#!/usr/bin/env zsh
+# Main zsh configuration entry point
+
+# Source helper function
+source_if_exists() {
+    [[ -f "$1" ]] && source "$1"
+}
+
+# Determine dotfiles directory
+DOTFILES_DIR="${HOME}/configs"
+
+# Load core configurations
+source_if_exists "${DOTFILES_DIR}/config/zsh/zshenv"
+source_if_exists "${DOTFILES_DIR}/config/zsh/history.zsh"
+source_if_exists "${DOTFILES_DIR}/config/zsh/completion.zsh"
+source_if_exists "${DOTFILES_DIR}/config/zsh/aliases.zsh"
+
+# Load plugins
+source_if_exists "${DOTFILES_DIR}/config/zsh/plugins/fzf.zsh"
+source_if_exists "${DOTFILES_DIR}/config/zsh/plugins/direnv.zsh"
+source_if_exists "${DOTFILES_DIR}/config/zsh/plugins/zoxide.zsh"
+source_if_exists "${DOTFILES_DIR}/config/zsh/plugins/zsh-plugins.zsh"
+
+# Load public functions
+if [[ -d "${HOME}/.zsh_functions" ]]; then
+    for func in ${HOME}/.zsh_functions/*; do
+        [[ -f "$func" ]] && source "$func"
+    done
+fi
+
+# Load private configuration (enterprise-specific)
+source_if_exists "${DOTFILES_DIR}/private/config/zsh/private.zsh"
+
+# Load local configuration (machine-specific)
+# Files in ${DOTFILES_DIR}/local/ are gitignored
+if [[ -d "${DOTFILES_DIR}/local" ]]; then
+    for local_file in "${DOTFILES_DIR}/local"/*.zsh; do
+        [[ -f "$local_file" ]] && source "$local_file"
+    done
+fi
+
+# Initialize Starship prompt (must be last)
+if command -v starship &> /dev/null; then
+    eval "$(starship init zsh)"
+fi

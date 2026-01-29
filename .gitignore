@@ -1,0 +1,23 @@
+# Backup files
+*.backup.*
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+
+# Keep local directory structure but ignore contents
+local/*
+!local/README.md

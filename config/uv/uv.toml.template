@@ -1,0 +1,6 @@
+# UV configuration for personal projects
+# See: https://docs.astral.sh/uv/
+
+[pip]
+# Use system certificates by default
+# This file can remain mostly empty for personal use
