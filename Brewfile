@@ -41,7 +41,6 @@ brew "awscli"    # AWS CLI
 
 # Security & Authentication
 brew "keyring"        # Credential storage
-brew "1password-cli"  # 1Password CLI
 
 # Applications (casks)
 cask "alfred"      # Productivity launcher
@@ -51,3 +50,7 @@ cask "obsidian"    # Knowledge management
 cask "rectangle"   # Window management
 cask "requestly"   # HTTP interceptor
 cask "signal"      # Secure messaging
+cask "1password-cli"  # 1Password CLI
+
+# Fonts
+cask "font-shure-tech-mono-nerd-font"

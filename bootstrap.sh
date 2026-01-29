@@ -5,7 +5,7 @@ set -e
 
 # Detect script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
+DOTFILES_DIR="$SCRIPT_DIR"
 
 # Colors for output
 RED='\033[0;31m'

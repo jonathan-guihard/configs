@@ -1,0 +1,20 @@
+{
+  "terminal.integrated.fontFamily": "ShureTechMono Nerd Font",
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.lineHeight": 1.2,
+  "editor.fontFamily": "ShureTechMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 13,
+  "editor.lineHeight": 20,
+  "editor.fontLigatures": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.tabCompletion": "on",
+  "editor.detectIndentation": true,
+  "files.insertFinalNewline": true,
+  "[terraform]": {
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

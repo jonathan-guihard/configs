@@ -33,6 +33,9 @@ fi
 # Interactive prompts
 section "Configuration"
 
+# Git user configuration
+read -p "Git user email: " GIT_USER_EMAIL
+
 # Private/enterprise config prompts
 HAS_PRIVATE_CONFIG=false
 if [[ -d "$DOTFILES_DIR/private" ]]; then
@@ -132,7 +135,7 @@ create_symlink "${DOTFILES_DIR}/config/zsh/zshrc" "$HOME/.zshrc"
 create_symlink "${DOTFILES_DIR}/config/starship/starship.toml" "$HOME/.config/starship.toml"
 
 # Vim
-create_symlink "${DOTFILES_DIR}/config/vim/init.vim" "$HOME/.config/nvim/init.vim"
+create_symlink "${DOTFILES_DIR}/config/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 
 # Link public functions
 section "Setting Up Functions"
@@ -187,6 +190,15 @@ if [[ "$SHELL" != *"zsh"* ]]; then
     fi
 else
     success "zsh is already your default shell"
+fi
+
+# Setup editor fonts
+section "Editor Font Configuration"
+info "Configuring Nerd Fonts for editors and terminals..."
+if [[ -f "${DOTFILES_DIR}/scripts/setup-editor-fonts.sh" ]]; then
+    "${DOTFILES_DIR}/scripts/setup-editor-fonts.sh"
+else
+    warn "Font setup script not found, skipping"
 fi
 
 # Verification

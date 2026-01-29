@@ -4,6 +4,9 @@
 ## CROSS-SHELL PROMPT
 ## The minimal, blazing-fast, and infinitely customizable prompt for any shell!
 
+"$schema" = 'https://starship.rs/config-schema.json'
+
+
 format = """
 $hostname\
 $directory\
@@ -35,15 +38,16 @@ $shell\
 $line_break\
 $character"""
 
+
 # Disable the blank line at the start of the prompt
 add_newline = true
+
 
 # Second param
 [hostname]
 ssh_only = true
 format = "[](fg:#252525 bg:none)[█](fg:#E8E3E3 bg:#252525)[$ssh_symbol$hostname](bold bg:#E8E3E3)[](fg:#E8E3E3 bg:none) "
 disabled = false
-
 
 # Third param
 [directory]
@@ -111,10 +115,12 @@ format = '\([$state( $progress_current/$progress_total)]($style)\) '
 # # SYMBOLS
 
 [aws]
-symbol = " "
+symbol = "  "
 format = '[[\[$profile\]](bold green)( - \[$region\])( - $duration)($expiration_symbol)]($style)'
 style = 'bold yellow'
 expiration_symbol = "❌"
+
+# [directory]
 
 [docker_context]
 symbol = " "
@@ -131,8 +137,14 @@ symbol = " "
 [golang]
 symbol = " "
 
+[hg_branch]
+symbol = " "
+
 [memory_usage]
 symbol = " "
+
+[package]
+symbol = " "
 
 [python]
 symbol = " "

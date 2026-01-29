@@ -34,6 +34,7 @@ source_if_exists "${DOTFILES_DIR}/private/config/zsh/private.zsh"
 # Load local configuration (machine-specific)
 # Files in ${DOTFILES_DIR}/local/ are gitignored
 if [[ -d "${DOTFILES_DIR}/local" ]]; then
+    setopt local_options nullglob
     for local_file in "${DOTFILES_DIR}/local"/*.zsh; do
         [[ -f "$local_file" ]] && source "$local_file"
     done

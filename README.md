@@ -19,6 +19,9 @@ A modular, cross-platform dotfiles repository using Starship with submodule for 
 git clone git@github.com:jonathan-guihard/configs.git ~/configs
 cd ~/configs
 
+# Add private submodule (optional, for enterprise configs)
+git submodule add git@github.com:jonathan-guihard/nexthink-config.git private
+
 # Run bootstrap (installs dependencies)
 ./bootstrap.sh
 
