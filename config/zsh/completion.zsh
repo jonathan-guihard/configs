@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 # Completion configuration
 
+# Add custom completion directories to fpath (MUST be before compinit)
+fpath=(~/.zsh_completions $fpath)
+
 # Load completions
 autoload -Uz compinit
 compinit
@@ -12,6 +15,3 @@ zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(|.|..) ]] && reply=(
 
 # Load completion module
 zmodload zsh/complist
-
-# Add custom completion directories to fpath
-fpath=(~/.zsh_completions $fpath)

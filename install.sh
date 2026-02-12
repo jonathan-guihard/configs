@@ -159,8 +159,18 @@ if [[ $HAS_PRIVATE_CONFIG == true ]] && [[ -d "${DOTFILES_DIR}/private/functions
     done
 fi
 
-# Link completions
+# Link public completions
 section "Setting Up Completions"
+if [[ -d "${DOTFILES_DIR}/completions" ]]; then
+    for comp in "${DOTFILES_DIR}/completions"/*; do
+        if [[ -f "$comp" ]]; then
+            comp_name=$(basename "$comp")
+            create_symlink "$comp" "$HOME/.zsh_completions/$comp_name"
+        fi
+    done
+fi
+
+# Link private completions if available
 if [[ $HAS_PRIVATE_CONFIG == true ]] && [[ -d "${DOTFILES_DIR}/private/completions" ]]; then
     for comp in "${DOTFILES_DIR}/private/completions"/*; do
         if [[ -f "$comp" ]]; then

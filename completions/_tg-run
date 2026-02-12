@@ -1,0 +1,84 @@
+#compdef tg-run
+
+# Zsh completion for tg-run (interactive terragrunt runner with fzf)
+#
+# Usage: tg-run [options] [terraform_command] [-- terraform_args...]
+#
+# Options:
+#   -d, --depth N           Search depth for finding terragrunt.hcl (default: 4)
+#   -e, --include-external  Include external dependencies (--queue-include-external)
+#
+# Examples:
+#   tg-run plan
+#   tg-run -d 6 apply
+#   tg-run apply -- -auto-approve
+
+_tg-run() {
+  local curcontext="$curcontext" state line
+  typeset -A opt_args
+
+  _arguments -C \
+    '(-d --depth)'{-d,--depth}'[Search depth for terragrunt.hcl files]:depth:(2 3 4 5 6 8 10)' \
+    '(-e --include-external)'{-e,--include-external}'[Include external dependencies]' \
+    '(-h --help)'{-h,--help}'[Show help message]' \
+    '1:terraform command:_tg_run_terraform_commands' \
+    '*::terraform args:->terraform_args'
+
+  case "$state" in
+    terraform_args)
+      # After --, provide terraform-specific completions
+      _tg_run_terraform_args
+      ;;
+  esac
+
+  return 0
+}
+
+# Terraform/Terragrunt command completions
+_tg_run_terraform_commands() {
+  local -a commands
+  commands=(
+    'init:Initialize a working directory'
+    'plan:Generate and show an execution plan'
+    'apply:Apply the changes'
+    'destroy:Destroy managed infrastructure'
+    'validate:Validate the configuration'
+    'fmt:Rewrite config files to canonical format'
+    'output:Show output values from state'
+    'show:Show the current state or a saved plan'
+    'state:Advanced state management'
+    'refresh:Update local state file'
+    'import:Import existing infrastructure'
+    'taint:Mark a resource for recreation'
+    'untaint:Remove taint from a resource'
+    'workspace:Workspace management'
+    'providers:Show providers required'
+    'version:Show Terraform version'
+    'graph:Generate dependency graph'
+    'console:Interactive console'
+  )
+  _describe -t commands 'terraform command' commands
+}
+
+# Terraform argument completions
+_tg_run_terraform_args() {
+  local -a args
+  args=(
+    '-auto-approve:Skip interactive approval'
+    '-backup=-:Path to backup file'
+    '-compact-warnings:Show warnings in compact format'
+    '-lock=:Lock the state file (true/false)'
+    '-lock-timeout=:Duration to retry lock'
+    '-no-color:Disable color output'
+    '-parallelism=:Number of concurrent operations'
+    '-refresh=:Update state (true/false)'
+    '-target=:Resource to target'
+    '-var:Set a variable'
+    '-var-file=:Load variables from file'
+    '-out=:Write plan to file'
+    '-json:Output in JSON format'
+  )
+  _describe -t args 'terraform argument' args
+}
+
+_tg-run "$@"
