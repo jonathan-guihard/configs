@@ -19,6 +19,7 @@ $vcsh\
 $hg_branch\
 $docker_context\
 $package\
+$aws\
 $custom\
 
 $sudo\
@@ -118,7 +119,33 @@ format = '\([$state( $progress_current/$progress_total)]($style)\) '
 symbol = "  "
 format = '[[\[$profile\]](bold green)( - \[$region\])( - $duration)($expiration_symbol)]($style)'
 style = 'bold yellow'
-expiration_symbol = "❌"
+disabled = false
+
+# Custom module to show AWS Vault session expiration time
+[custom.aws_vault_expiry]
+command = '''
+if [[ -n "$AWS_VAULT" && -n "$AWS_SESSION_EXPIRATION" ]]; then
+  now=$(date +%s)
+  # Parse ISO 8601 format from aws-vault
+  exp_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$AWS_SESSION_EXPIRATION" +%s 2>/dev/null || echo "0")
+  remaining=$((exp_epoch - now))
+
+  if [[ $remaining -gt 0 ]]; then
+    hours=$((remaining / 3600))
+    mins=$(((remaining % 3600) / 60))
+    if [[ $hours -gt 0 ]]; then
+      echo "${hours}h${mins}m"
+    else
+      echo "${mins}m"
+    fi
+  else
+    echo "expired"
+  fi
+fi
+'''
+when = '[[ -n "$AWS_VAULT" ]]'
+format = '[ ](fg:#252525 bg:none)[](fg:#252525 bg:#252525)[](fg:#F7B27A bg:#252525)[󰅐 ](fg:#252525 bg:#F7B27A)[](fg:#F7B27A bg:none) '
+description = "AWS Vault session expiration time"
 
 # [directory]
 
