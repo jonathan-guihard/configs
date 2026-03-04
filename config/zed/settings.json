@@ -1,0 +1,205 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  //--------------------------------------------------------------
+  // Global Settings
+  //--------------------------------------------------------------
+  "ui_font_family": ".ZedSans",
+  "file_finder": {
+    "modal_max_width": "small",
+  },
+  "when_closing_with_no_tabs": "close_window",
+  "file_scan_exclusions": ["**/.git"],
+  "prettier": {
+    "allowed": true,
+  },
+  "redact_private_values": false,
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "session": {
+    "trust_all_worktrees": false,
+  },
+  "vim_mode": false,
+  "terminal": {
+    "copy_on_select": true,
+    "detect_venv": {
+      "on": {
+        "directories": [".env", "env", ".venv", "venv"],
+        "activate_script": "default",
+      },
+    },
+    "font_size": 13.0,
+    "font_family": "ShureTechMono Nerd Font",
+    "max_scroll_history_lines": 100000,
+    // "line_height": {
+    //   "custom": 1.2,
+    // },
+  },
+  "minimap": {
+    "show": "never",
+  },
+  "buffer_font_fallbacks": ["Menlo", "Monaco", "Courier New"],
+  "buffer_font_family": "ShureTechMono Nerd Font",
+  "colorize_brackets": true,
+  "autosave": "off",
+  "format_on_save": "on",
+  "tabs": {
+    "activate_on_close": "left_neighbour",
+    "file_icons": true,
+    "git_status": true,
+  },
+  "show_whitespaces": "all",
+  "tab_bar": {
+    "show": true,
+  },
+  "scrollbar": {
+    "show": "never",
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+  "ensure_final_newline_on_save": true,
+  "hard_tabs": false,
+  "tab_size": 2,
+  "base_keymap": "VSCode",
+  "icon_theme": {
+    "mode": "system",
+    "light": "Zed (Default)",
+    "dark": "Catppuccin Macchiato",
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 13.0,
+  "theme": {
+    "mode": "dark",
+    "light": "Ayu Light",
+    "dark": "Ayu Dark",
+  },
+  //--------------------------------------------------------------
+  // AI Settings
+  //--------------------------------------------------------------
+  "agent": {
+    "play_sound_when_agent_done": false,
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-6-latest",
+      "enable_thinking": false,
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  //--------------------------------------------------------------
+  // File types
+  //--------------------------------------------------------------
+  "file_types": {
+    "OpenTofu": ["tf"],
+    "OpenTofu Vars": ["tfvars"],
+    "Terragrunt": [
+      "terragrunt.hcl",
+      "*.js.tpl",
+      "terragrunt.hcl.json", // if you ever use JSON variant
+    ],
+    "HCL": ["terragrunt.hcl", "*.hcl"],
+    "jinja-json": ["*.json.j2", "*.json"],
+    "jinja-html": ["*.html.j2"],
+    "TOML": ["MyLockFile"],
+    "Dockerfile": ["Dockerfile*"],
+  },
+
+  //--------------------------------------------------------------
+  // Languages
+  //--------------------------------------------------------------
+  "languages": {
+    "JSON": {
+      // "formatter": "language_server",
+      "prettier": {
+        "allowed": true,
+      },
+      "tab_size": 2,
+      "colorize_brackets": true,
+    },
+    "JSONC": {
+      "prettier": {
+        "allowed": true,
+      },
+      "tab_size": 2,
+      "colorize_brackets": true,
+    },
+    "HCL": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "terragrunt",
+          "arguments": ["hcl", "fmt", "--stdin", "{buffer_path}"],
+        },
+      },
+    },
+    "Python": {
+      // "language_servers": ["!basedpyright", "PyLSP"],
+      "preferred_line_length": 120,
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "bash",
+          "arguments": [
+            "-c",
+            "ruff check --select=I --fix --stdin-filename {buffer_path} | ruff format --stdin-filename {buffer_path} --line-length 120",
+          ],
+        },
+      },
+    },
+    "YAML": {
+      "tab_size": 2,
+    },
+    "Shell Script": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "shfmt",
+          // Change `--indent 2` to match your preferred tab_size
+          "arguments": ["--filename", "{buffer_path}", "--indent", "2"],
+        },
+      },
+    },
+    "Markdown": {
+      "format_on_save": "on",
+      "tab_size": 2,
+      // "indent_list_on_tab": true,
+      "remove_trailing_whitespace_on_save": false,
+      "prettier": {
+        "allowed": true,
+      },
+      // "formatter": {
+      //   "external": {
+      //     "command": "prettier",
+      //     "arguments": ["--stdin-filepath", "{buffer_path}"],
+      //   },
+      // },
+    },
+    "Go": {
+      "code_actions_on_format": {
+        "source.organizeImports": true,
+      },
+      "debuggers": ["Delve"],
+    },
+    "Diff": {
+      "show_edit_predictions": false,
+      "remove_trailing_whitespace_on_save": false,
+      "ensure_final_newline_on_save": false,
+    },
+    "XML": {
+      "prettier": {
+        "allowed": true,
+        "plugins": ["@prettier/plugin-xml"],
+      },
+    },
+  },
+}

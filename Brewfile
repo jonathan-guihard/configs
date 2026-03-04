@@ -44,6 +44,7 @@ brew "awscli"    # AWS CLI
 brew "keyring"        # Credential storage
 
 # Applications (casks)
+cask "zed"         # Code editor
 cask "alfred"      # Productivity launcher
 cask "arc"         # Web browser
 cask "flameshot"   # Screenshot tool
