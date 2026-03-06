@@ -65,6 +65,6 @@ configure_editor "Cursor" "$HOME/Library/Application Support/Cursor"
 
 section "Font Configuration Complete"
 info "Next steps:"
-echo "  • VS Code/Cursor: Reload window (Cmd+Shift+P → 'Reload Window')"
+echo "  • VS Code/Cursor/Zed: Reload window (Cmd+Shift+P → 'Reload Window')"
 echo "  • iTerm2: Restart iTerm2, then go to Profiles → Profile → Text → Font"
 echo "  • Or manually select 'ShureTechMono Nerd Font' in your editor/terminal preferences"

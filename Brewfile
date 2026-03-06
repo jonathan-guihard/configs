@@ -10,7 +10,8 @@ brew "gh"
 brew "ghostty"
 
 # Python tooling
-brew "uv"        # Modern Python package manager (replaces pip/pipenv)
+brew "python"  # Python 3 (includes pip3)
+brew "uv"      # Modern Python package manager (replaces pip/pipenv)
 
 # Zsh plugins
 brew "zsh-autosuggestions"

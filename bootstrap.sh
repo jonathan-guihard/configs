@@ -118,11 +118,11 @@ elif [[ "$PLATFORM" == "linux" ]]; then
 
     if command -v apt-get &> /dev/null; then
         sudo apt-get update
-        sudo apt-get install -y zsh neovim fzf direnv ripgrep fd-find bat tree jq wget htop tmux
+        sudo apt-get install -y zsh neovim fzf direnv ripgrep fd-find bat tree jq wget htop tmux python3-pip
     elif command -v dnf &> /dev/null; then
-        sudo dnf install -y zsh neovim fzf direnv ripgrep fd-find bat tree jq wget htop tmux
+        sudo dnf install -y zsh neovim fzf direnv ripgrep fd-find bat tree jq wget htop tmux python3-pip
     elif command -v pacman &> /dev/null; then
-        sudo pacman -S --noconfirm zsh neovim fzf direnv ripgrep fd bat tree jq wget htop tmux
+        sudo pacman -S --noconfirm zsh neovim fzf direnv ripgrep fd bat tree jq wget htop tmux python-pip
     else
         warn "Unknown package manager. Please install dependencies manually."
     fi

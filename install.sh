@@ -183,6 +183,23 @@ if [[ $HAS_PRIVATE_CONFIG == true ]] && [[ -d "${DOTFILES_DIR}/private/completio
     done
 fi
 
+# Python dependencies
+section "Python Dependencies"
+if [[ -f "${DOTFILES_DIR}/requirements.txt" ]]; then
+    if command -v pip3 &> /dev/null; then
+        info "Installing Python packages with pip3..."
+        pip3 install --break-system-packages -r "${DOTFILES_DIR}/requirements.txt"
+    else
+        warn "pip3 not found."
+    fi
+    success "Python dependencies installed"
+fi
+
+# Run private install script if available
+if [[ $HAS_PRIVATE_CONFIG == true ]] && [[ -f "${DOTFILES_DIR}/private/install.sh" ]]; then
+    bash "${DOTFILES_DIR}/private/install.sh"
+fi
+
 # Set zsh as default shell
 section "Default Shell"
 if [[ "$SHELL" != *"zsh"* ]]; then
