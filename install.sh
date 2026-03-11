@@ -195,6 +195,25 @@ if [[ -f "${DOTFILES_DIR}/requirements.txt" ]]; then
     success "Python dependencies installed"
 fi
 
+# Claude Code settings (merge statusLine + hooks into existing settings)
+section "Claude Code Configuration"
+CLAUDE_SETTINGS="$HOME/.claude/settings.json"
+CLAUDE_PATCH="${DOTFILES_DIR}/config/claude/settings.json"
+if command -v jq &> /dev/null; then
+    create_dir_if_missing "$HOME/.claude"
+    if [[ -f "$CLAUDE_SETTINGS" ]]; then
+        info "Merging Claude Code statusline and hooks into existing settings..."
+        jq -s '.[0] * .[1]' "$CLAUDE_SETTINGS" "$CLAUDE_PATCH" > "${CLAUDE_SETTINGS}.tmp" \
+            && mv "${CLAUDE_SETTINGS}.tmp" "$CLAUDE_SETTINGS"
+    else
+        info "Creating Claude Code settings..."
+        cp "$CLAUDE_PATCH" "$CLAUDE_SETTINGS"
+    fi
+    success "Claude Code settings configured"
+else
+    warn "jq not found — skipping Claude Code settings merge"
+fi
+
 # Run private install script if available
 if [[ $HAS_PRIVATE_CONFIG == true ]] && [[ -f "${DOTFILES_DIR}/private/install.sh" ]]; then
     bash "${DOTFILES_DIR}/private/install.sh"
