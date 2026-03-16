@@ -21,6 +21,7 @@ brew "zsh-completions"
 # Navigation and search
 brew "fzf"
 brew "direnv"
+brew "mise"
 brew "zoxide"  # Modern alternative to autojump
 
 # Modern CLI tools
