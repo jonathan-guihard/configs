@@ -92,3 +92,4 @@ When the user asks to add a new tool/script/config, follow this checklist:
 - Directory helper: `create_dir_if_missing <path>`
 - Platform detection: `is_macos`, `is_linux`, `detect_platform`
 - When a command needs zsh completion, use a **function** (not an alias) + `compdef`. Aliases bypass completion because zsh expands them before running the completion system. Pattern: `cmd() { python3 /path/to/script.py "$@" }` + `compdef _cmd cmd`
+- Tool-generated completions (e.g. `mise completion zsh`) go in `config/zsh/completion.zsh` (before `compinit`), **not** in `install.sh`. This keeps them fresh on every shell start.

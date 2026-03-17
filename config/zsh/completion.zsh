@@ -4,6 +4,11 @@
 # Add custom completion directories to fpath (MUST be before compinit)
 fpath=(~/.zsh_completions $fpath)
 
+# Generate completions from tools (before compinit)
+if command -v mise &> /dev/null; then
+    mise completion zsh > "$HOME/.zsh_completions/_mise"
+fi
+
 # Load completions
 autoload -Uz compinit
 compinit
