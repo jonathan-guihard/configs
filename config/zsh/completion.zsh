@@ -2,6 +2,10 @@
 # Completion configuration
 
 # Add custom completion directories to fpath (MUST be before compinit)
+# Include brew's zsh-completions if available
+if type brew &>/dev/null; then
+    fpath=($(brew --prefix)/share/zsh-completions $fpath)
+fi
 fpath=(~/.zsh_completions $fpath)
 
 # Generate completions from tools (before compinit)
