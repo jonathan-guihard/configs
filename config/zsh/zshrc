@@ -19,6 +19,7 @@ source_if_exists "${DOTFILES_DIR}/config/zsh/aliases.zsh"
 source_if_exists "${DOTFILES_DIR}/config/zsh/plugins/fzf.zsh"
 source_if_exists "${DOTFILES_DIR}/config/zsh/plugins/direnv.zsh"
 source_if_exists "${DOTFILES_DIR}/config/zsh/plugins/zoxide.zsh"
+source_if_exists "${DOTFILES_DIR}/config/zsh/plugins/mise.zsh"
 source_if_exists "${DOTFILES_DIR}/config/zsh/plugins/zsh-plugins.zsh"
 
 # Load public functions
