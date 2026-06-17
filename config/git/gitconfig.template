@@ -18,6 +18,5 @@
     excludesfile = ~/.gitignore_global
 
 # Conditional includes for work/enterprise configs
-# This loads Nexthink config ONLY when in ~/nexthink/projects/ directories
-[includeIf "gitdir:~/nexthink/projects/"]
+[includeIf "gitdir:~/nexthink/github.com/"]
     path = ~/configs/private/config/git/gitconfig-nexthink
