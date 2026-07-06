@@ -49,7 +49,7 @@ brew "keyring"        # Credential storage
 cask "zed"         # Code editor
 cask "alfred"      # Productivity launcher
 cask "arc"         # Web browser
-cask "flameshot"   # Screenshot tool
+cask "shottr"      # Screenshot tool
 cask "obsidian"    # Knowledge management
 cask "rectangle"   # Window management
 cask "requestly"   # HTTP interceptor
