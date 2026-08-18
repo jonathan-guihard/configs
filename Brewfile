@@ -37,6 +37,7 @@ brew "htop"      # System monitor
 # Development tools
 brew "tmux"      # Terminal multiplexer
 brew "ffmpeg"    # Media processing
+brew "rustup"    # Rust toolchain manager (rustc, cargo, rustup)
 
 # AWS & Cloud tools
 brew "aws-vault" # AWS credential management
