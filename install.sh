@@ -37,13 +37,24 @@ section "Configuration"
 read -p "Git user email: " GIT_USER_EMAIL
 
 # Private/enterprise config prompts
+# Reuses the answer from bootstrap.sh (INSTALL_PRIVATE env var, then
+# local/.install_private), and only prompts if neither is set
 HAS_PRIVATE_CONFIG=false
-if [[ -d "$DOTFILES_DIR/private" ]]; then
+INSTALL_PRIVATE="${INSTALL_PRIVATE:-}"
+INSTALL_PRIVATE_FILE="$DOTFILES_DIR/local/.install_private"
+if [[ -z "$INSTALL_PRIVATE" ]] && [[ -f "$INSTALL_PRIVATE_FILE" ]]; then
+    INSTALL_PRIVATE="$(<"$INSTALL_PRIVATE_FILE")"
+fi
+# An uninitialized submodule leaves an empty private/ directory
+if [[ -n "$(ls -A "$DOTFILES_DIR/private" 2>/dev/null)" ]]; then
     echo ""
     info "Private configuration detected"
-    read -p "Configure enterprise settings? (y/n) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [[ -z "$INSTALL_PRIVATE" ]]; then
+        read -p "Configure private settings? (y/n) " -n 1 -r
+        echo
+        INSTALL_PRIVATE="$REPLY"
+    fi
+    if [[ $INSTALL_PRIVATE =~ ^([Yy]|true$) ]]; then
         HAS_PRIVATE_CONFIG=true
         read -p "SSH username for work hosts: " SSH_USER
         read -p "SSH identity file for work hosts: " SSH_IDENTITY_FILE
@@ -54,6 +65,8 @@ if [[ -d "$DOTFILES_DIR/private" ]]; then
             echo
             [[ $REPLY =~ ^[Yy]$ ]] && USE_1PASSWORD=true
         fi
+    else
+        info "Skipping private configuration"
     fi
 fi
 

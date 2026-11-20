@@ -76,14 +76,37 @@ if [[ "$PLATFORM" == "macos" ]]; then
     fi
 fi
 
-# Initialize git submodule if it exists
+# Ask whether the private configuration should be installed
+# Can be preset non-interactively with INSTALL_PRIVATE=y|n
+# The answer is saved to local/.install_private so install.sh reuses it
+INSTALL_PRIVATE="${INSTALL_PRIVATE:-}"
+INSTALL_PRIVATE_FILE="$DOTFILES_DIR/local/.install_private"
 if [[ -f "$DOTFILES_DIR/.gitmodules" ]]; then
-    section "Initializing Git Submodules"
+    section "Private Configuration"
+    if [[ -z "$INSTALL_PRIVATE" ]]; then
+        if [[ -t 0 ]]; then
+            read -p "Install private configuration (git submodule + private packages)? (y/n) " -n 1 -r
+            echo
+            INSTALL_PRIVATE="$REPLY"
+        else
+            warn "Non-interactive shell, skipping private configuration (set INSTALL_PRIVATE=y to enable)"
+            INSTALL_PRIVATE="n"
+        fi
+    fi
+fi
+
+if [[ $INSTALL_PRIVATE =~ ^[Yy] ]]; then
+    INSTALL_PRIVATE=true
     info "Updating submodule (private configs)..."
     cd "$DOTFILES_DIR"
     git submodule update --init --recursive
     success "Submodule initialized"
+else
+    INSTALL_PRIVATE=false
+    info "Skipping private configuration"
 fi
+mkdir -p "$DOTFILES_DIR/local"
+echo "$INSTALL_PRIVATE" > "$INSTALL_PRIVATE_FILE"
 
 # Install dependencies
 section "Installing Dependencies"
@@ -98,20 +121,12 @@ if [[ "$PLATFORM" == "macos" ]]; then
     fi
 
     # Install private/enterprise packages
-    if [[ -d "$DOTFILES_DIR/private" ]] && [[ -f "$DOTFILES_DIR/private/Brewfile" ]]; then
-        echo ""
-        info "Private configuration detected"
-        read -p "Install enterprise packages from private Brewfile? (y/n) " -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            info "Installing packages from private Brewfile..."
-            cd "$DOTFILES_DIR/private"
-            brew bundle
-            success "Enterprise packages installed"
-            cd "$DOTFILES_DIR"
-        else
-            info "Skipping enterprise packages"
-        fi
+    if [[ $INSTALL_PRIVATE == true ]] && [[ -f "$DOTFILES_DIR/private/Brewfile" ]]; then
+        info "Installing packages from private Brewfile..."
+        cd "$DOTFILES_DIR/private"
+        brew bundle
+        success "Private packages installed"
+        cd "$DOTFILES_DIR"
     fi
 elif [[ "$PLATFORM" == "linux" ]]; then
     info "Installing Linux dependencies..."
