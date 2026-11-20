@@ -49,7 +49,6 @@ brew "keyring"        # Credential storage
 # Applications (casks)
 cask "zed"         # Code editor
 cask "alfred"      # Productivity launcher
-cask "arc"         # Web browser
 cask "shottr"      # Screenshot tool
 cask "obsidian"    # Knowledge management
 cask "rectangle"   # Window management
