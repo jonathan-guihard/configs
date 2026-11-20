@@ -7,7 +7,6 @@ brew "starship"
 brew "neovim"
 brew "git"
 brew "gh"
-brew "ghostty"
 
 # Python tooling
 brew "python"  # Python 3 (includes pip3)
@@ -47,6 +46,7 @@ brew "awscli"    # AWS CLI
 brew "keyring"        # Credential storage
 
 # Applications (casks)
+cask "ghostty"     # Terminal emulator
 cask "zed"         # Code editor
 cask "alfred"      # Productivity launcher
 cask "shottr"      # Screenshot tool
